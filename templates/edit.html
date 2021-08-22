@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}Edit Details{% endblock title %}
+
+{% block body %}
+<div class="container-fluid">
+<h1>Edit Your Credentials</h1>
+<form action="/editdetails" method="post">
+{% csrf_token %}
+<label class="form-label" for="username">UserName</label>
+          <input
+            value="{{user.username}}"
+            name='username'
+            class="form-control"
+            type="text"
+            id="username"
+          />
+          <label class="form-label" for="fName">First Name</label>
+          <input
+            value="{{ user.first_name }}"
+            class="form-control"
+            type="text"
+            name='fName'
+            id="fName"
+          />
+          <label class="form-label" for="lName">Last Name</label>
+          <input
+            value="{{ user.last_name }}"
+            class="form-control"
+            type="text"
+            name='lName'
+            id="lName"
+          />
+          <label class="form-label" for="mail">Mail-ID</label>
+          <input
+            name='email'
+            value="{{ user.email }}"
+            class="form-control"
+            type='text'
+            id="mail"
+          />
+          <br>
+          <label class="form-label" for="password">Enter Password to continue</label>
+          <input
+            name='password'
+            class="form-control"
+            type='Password'
+            id="password"
+          />
+          
+          <input class="btn btn-primary mt-4" type="submit" value="Change">
+          <a href="/changepass" class="btn btn-danger mt-4">Change Password</a>
+</form>
+</div>
+
+{% endblock body %}

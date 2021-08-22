@@ -1,0 +1,37 @@
+{% extends 'base.html' %} 
+{% block title %}Register{% endblock title %} 
+{% block body %}
+<div  class="container">
+{% if user.is_authenticated %}
+    You need to logout create an new account!
+    <a role='button' href='/logout' class="btn btn-outline-success mx-2">Log Out ??</a>
+{% else %}
+    <h1>Register</h1>
+    <hr class="mb-4">
+    <form action="/register" method="post">
+      {% csrf_token %}
+      <label class="form-label" for="username">UserName</label>
+      <input class="form-control" type="text" name="username" id="username" />
+      <label class="form-label" for="email">Email</label>
+      <input class="form-control" type="email" name="email" id="email" />
+<div class="container display-flex">
+<div class="container p-0">
+      <label class="form-label" for="fName">First Name</label>
+      <input class="form-control" type="text" name="fName" id="fName" />
+</div>
+<div class="container p-0">
+      <label class="form-label" for="lName">Last Name</label>
+      <input class="form-control" type="text" name="lName" id="lName" />
+</div>
+</div>
+
+      <label class="form-label" for="password">Password</label>
+      <input class="form-control" type="password" name="password" id="password" />
+      <input class="btn btn-primary" type="submit" value="Register" />
+    </form>
+
+    <a href="login">Have an account?? Login!!</a>
+{% endif %}
+
+</div>
+{% endblock body %}

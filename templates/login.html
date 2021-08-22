@@ -1,0 +1,25 @@
+{% extends 'base.html' %} 
+{% block title %}LogIn{% endblock title %} 
+{% block loginactive %}active{% endblock loginactive %}
+{% block body %}
+<div  class="container">
+
+{% if user.is_authenticated %}
+    You need to logout to Login with other account!
+    <a role='button' href='/logout' class="btn btn-outline-success mx-2">Log Out ??</a>
+{% else %}
+    <h1>Log In</h1>
+    <hr class="mb-4">
+    <form action="/login" method="post">
+      {% csrf_token %}
+      <label class="form-label" for="username">UserName</label>
+      <input class="form-control" type="text" name="username" id="username" /><br>
+      <label class="form-label" for="password">Password</label>
+      <input class="form-control" type="password" name="password" id="password" /><br>
+      <input class="btn btn-primary" type="submit" value="Login" />
+    </form>
+    <a href="register">Dont Have an account?? Create One!!</a>
+{% endif %}
+
+</div>
+{% endblock body %}

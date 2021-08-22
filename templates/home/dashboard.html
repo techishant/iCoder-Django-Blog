@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard - {{ user }}{% endblock title %}
+{% block extraHead %}
+<link rel="stylesheet" href="/static/dashboard.css">
+{% endblock extraHead %}
+{% block body %}
+<div style='display: flex; overflow-x: hidden;' class="container-fluid m-0 p-0">
+  <div id="deleteHover">
+  <form action="/blog/deletepost" method='Post'>
+      {% csrf_token %}
+      <button type='button' onclick="shid('off', null)" style='margin-left:80%;' class="btn btn-warning">&Cross;</button>
+      <br>
+      Are you sure want to delete the post??
+      <br><br><br><br><br>
+      <input id="inp" type="hidden" value="" name="Dslug">
+      <button style='margin: 0 auto;' class='btn btn-danger' type="submit">Delete the Post</button>
+  </form>
+  </div>
+  <div class="sidebar p-2">   
+    <small class="text-muted pl-3">Dashboard</small>
+    <div class="prof"></div>
+    <hr>
+    <div class="details">
+      <label style='color:#eee;' class="form-label" for="username">UserName</label>
+      <input
+        disabled
+        value="{{user.username}}"
+        class="form-control"
+        type="text"
+        id="username"
+      />
+      <label style='color:#eee;' class="form-label" for="fName">First Name</label>
+      <input
+        disabled
+        value="{{ user.first_name }}"
+        class="form-control"
+        type="text"
+        id="fName"
+      />
+      <label style='color:#eee;' class="form-label" for="lName">Last Name</label>
+      <input
+        disabled
+        value="{{ user.last_name }}"
+        class="form-control"
+        type="text"
+        id="lName"
+      />
+      <label style='color:#eee;' class="form-label" for="mail">Mail-ID</label>
+      <input
+        disabled
+        value="{{ user.email }}"
+        class="form-control"
+        type='text'
+        id="mail"
+      />
+    </div>
+  </div>
+  <div class='containerBo'>
+    <h1 style='display:inline;'>Your Posts</h1><a href="/new" role='button' class='mx-5 btn btn-info'><strong>+</strong></a>
+    {% for post in allposts %}
+    <div class="row g-0 border rounded overflow-hidden flex-md-row my-1 shadow-sm h-md-250">
+      <div class="col p-4 d-flex flex-column">
+        <h3 class="mb-0">{{post.title}}</h3>
+        <div class="mb-1 text-muted">{{post.timeStamp}} | {{post.DateStamp}}</div>
+        <p class="card-text mb-auto">{{post.content | truncatechars:120}}</p>
+        <div class="my-2">
+          <a href="/blog/{{post.slug}}" role="button" class="btn btn-primary">Open</a>
+          <form style='display:inline;' action="/blog/editpost" method="post">
+            {% csrf_token %}
+            <input type="hidden" value='{{post.slug}}' name="Eslug">
+            <button type='submit' class="btn btn-warning">Edit</button>
+          </form>
+          <button onclick="shid('on','{{post.slug}}' )" type='button' class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% block scriptAdd %}
+<script>
+var hover = document.getElementById('deleteHover'),
+inp = document.getElementById('inp');
+
+function shid(onOrOff, slug){
+    if (onOrOff == 'off'){
+        hover.style.display = 'none';
+    }
+    else{
+        inp.value=slug;
+        console.log(slug);
+        hover.style.display = 'flex';
+    }
+}
+</script>
+{% endblock scriptAdd %}
+{% endblock body %}

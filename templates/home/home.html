@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block homeactive %} active {% endblock homeactive %}
+{% block body %}
+
+<div class="container">
+<div class="p-5 my-4 bg-light rounded-3">
+  <h1 class="display-4">Welcome {{ user.first_name }}</h1>
+  <p class="lead">This is a simple Blog App, It is easy to use with the best ultra most ultra and more ultra design. You can never find a website like this. It worths only $9999999 on 73% discount. Especially for you.</p>
+  <hr class="my-4">
+  <a class="btn btn-primary btn-lg" href="/blog" role="button">Go to Blog</a>
+</div>
+</div>
+
+<div class="container">
+<h2>Few Blog Posts</h2>
+{% for post in fpost %}
+      <div class="row g-0 border rounded overflow-hidden flex-md-row my-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">by {{post.author}}</strong>
+          <h3 class="mb-0">{{post.title}}</h3>
+          <div class="mb-1 text-muted">{{post.DateStamp}}</div>
+          <p class="card-text mb-auto">{{post.content| truncatechars:250}}</p>
+          <a href="/blog/{{post.slug}}" class="stretched-link">Read more</a>
+        </div>
+      </div>
+{% endfor %}
+</div>
+{% endblock body %}

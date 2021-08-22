@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Edit Post{% endblock title %}
+{% block blogactive %} active {% endblock blogactive %}
+{% block body %}
+ <div class="container my-3">
+    <form action="/blog/update" method="post">
+    {% csrf_token %}
+        <input type="hidden" value='{{post.slug}}' name="slug">
+        <p class='pb-1' ><label  class="form-label" for="title">Title</label><input value='{{post.title}}' class="form-control" type="text" name="title" id="title"></p>
+        <p class='pb-1' ><label  class="form-label" for="content">Content</label><textarea class="form-control" rows='8' name="content" id="content">{{post.content}}</textarea></p>
+        <p class='pb-1' ><label  class="form-label" for="date">Date</label><input  class="form-control" type="date" name="date" id="date"></p>
+        <p class='pb-1' ><label  class="form-label" for="time">Time</label><input  class="form-control" type="time" name="time" id="time"></p>
+        <button type="submit" class="btn btn-primary">Post</button>
+    </form>
+</div>
+{% endblock body %}
