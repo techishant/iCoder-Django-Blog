@@ -11,6 +11,8 @@ class Contact(models.Model):
     email = models.CharField(max_length=100)
     content = models.TextField()
     timeStamp = models.DateTimeField(auto_now_add=True, blank=True)
+    likes = models.IntegerField(default=0)
+    dislikes = models.IntegerField(default=0)
 
     def __str__(self):
         return 'message from: ' + self.name + ' - ' + self.email

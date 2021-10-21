@@ -1,12 +1,65 @@
 {% extends 'base.html' %}
 {% block title %}{{post.title}} - iCoder{% endblock title %}
 
+{% block extraHead %}
+<style>
+.box{
+  height: fit-content;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+
+.box button{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.box button:nth-child(1) span{
+  position: absolute;
+  top:5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.box button:nth-child(2) span{
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.box button:nth-child(1){
+  outline: none;
+  height: 0;
+  width: 0;
+  border: 28px solid transparent;
+  border-bottom: 28px solid #c9c9c9;
+  border-top: none;
+  margin-bottom: 2px;
+  background: transparent;
+}
+.box button:nth-child(2){
+  background: transparent;
+  outline: none;
+  height: 0;
+  width: 0;
+  border: 28px solid transparent;
+  border-top: 28px solid #c9c9c9;
+  border-bottom: none;
+  margin-top: 2px;
+}
+
+</style>
+{% endblock extraHead %}
 {% block blogactive %} active {% endblock blogactive %}
 {% block body %}
 <div class="container my-3">
   <div class="blog-post">
     <h2 class="blog-post-title">{{post.title}}</h2>
-    <p class="blog-post-meta">{{post.timeStamp}} by <a href="#">{{post.author}}</a></p>
+    <div class="box"><button><span>{{post.likes}}</span></button><button><span>{{post.dislikes}}</span></button></div>
+    <p style="width: fit-content;" class="blog-post-meta">{{post.timeStamp}} by <a href="#">{{post.author}}</a></p>
     <p>{{post.content | safe}}</p>
     <hr>
   </div>
